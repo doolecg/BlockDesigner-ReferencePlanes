@@ -1,3 +1,14 @@
+# Reference Planes 1.1.3
+
+Kept up to date with BlockDesigner 0.4.17: built and tested against its plugin API. Nothing changes in how it works.
+
+**Needs BlockDesigner 0.4.14 or later** (plugin API 4). BlockDesigner 0.4.16 and later update to it by themselves.
+
+## Changed
+- Built against the BlockDesigner 0.4.17 plugin API.
+
+---
+
 # Reference Planes 1.1.2
 
 Reference Planes now updates itself.
