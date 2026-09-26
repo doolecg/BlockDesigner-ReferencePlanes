@@ -1,3 +1,15 @@
+# Reference Planes 1.1.0
+
+Settings for new pictures, in the plugin's own tab on the right.
+
+**Needs BlockDesigner 0.4.14 or later** (plugin API 4). Install: download `reference-planes-1.1.0.jar` below, then in BlockDesigner open **Plugins › Manage plugins… › Install…** and pick it (it replaces 1.0.0).
+
+## New
+- **Reference Planes tab** on the right: shows the plugin is running, has an **Add reference image…** button, and holds its settings.
+- **Settings for new pictures:** their height in blocks, opacity, whether they're drawn behind, among or in front of blocks, and whether a picture added in an axis view shows only in that view. Each picture can still be changed from its right-click menu.
+
+---
+
 # Reference Planes 1.0.0
 
 The first release of Reference Planes: reference images in the scene, like Blender's.

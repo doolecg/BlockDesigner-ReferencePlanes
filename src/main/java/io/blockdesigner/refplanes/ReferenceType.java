@@ -2,6 +2,8 @@ package io.blockdesigner.refplanes;
 
 import io.blockdesigner.plugin.ObjectHandle;
 import io.blockdesigner.plugin.PluginContext;
+import io.blockdesigner.plugin.Pose;
+import io.blockdesigner.plugin.ToolEvent.Vec3;
 import io.blockdesigner.plugin.SceneObject;
 import io.blockdesigner.plugin.SceneObjectType;
 import io.blockdesigner.plugin.ViewInfo;
@@ -21,9 +23,15 @@ final class ReferenceType implements SceneObjectType {
     static final List<String> EXTENSIONS = List.of("png", "jpg", "jpeg", "gif", "bmp");
 
     private final PluginContext ctx;
+    private NewPictures newPictures = NewPictures.DEFAULT;
 
     ReferenceType(PluginContext ctx) {
         this.ctx = ctx;
+    }
+
+    /** The plugin's settings changed: how the next pictures start out. */
+    void setNewPictures(NewPictures n) {
+        newPictures = n;
     }
 
     @Override
@@ -68,16 +76,21 @@ final class ReferenceType implements SceneObjectType {
     }
 
     /**
-     * Adds a reference image of {@code file} at the view's target, facing the camera; in an orthographic axis view it
-     * shows only in that view, like Blender's "align to view" references.
+     * Adds a reference image of {@code file} at the view's target, facing the camera, set up as the plugin's settings
+     * say; in an orthographic axis view it shows only in that view (unless the settings say otherwise), like Blender's
+     * "align to view" references.
      */
     ObjectHandle add(Path file, ViewInfo view) throws IOException {
         Loaded l = load(file);
+        NewPictures n = newPictures;
         ReferenceImage ref = new ReferenceImage(ctx, this);
         ref.set(ReferenceSettings.DEFAULT.withImage(l.blob(), l.fileName(), l.decoded().width(), l.decoded().height())
-                .withShowIn(ReferenceSettings.showInFor(view)), l.decoded().image());
+                .withShowIn(n.onlyInItsView() ? ReferenceSettings.showInFor(view) : ReferenceSettings.ShowIn.ALL)
+                .withOpacity(n.opacity()).withDepth(n.depth()), l.decoded().image());
         String name = l.fileName().replaceFirst("\\.[^.]*$", "");
-        ObjectHandle h = ctx.objects().add(ID, name, ReferenceSettings.placement(view), ref);
+        Pose at = ReferenceSettings.placement(view);
+        at = new Pose(at.position(), at.rotation(), new Vec3(n.height(), n.height(), n.height()));
+        ObjectHandle h = ctx.objects().add(ID, name, at, ref);
         ctx.toast("Added " + name + " · G / R move and turn it · right-click for its options");
         return h;
     }

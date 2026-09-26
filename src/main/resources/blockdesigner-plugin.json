@@ -5,5 +5,5 @@
   "author": "BlockDesigner",
   "description": "Reference images in the scene, like Blender's: add a picture, move, turn and scale it, choose the views it shows in, its opacity and whether blocks cover it. Listed in the Layers panel as REFERENCE.",
   "main": "io.blockdesigner.refplanes.ReferencePlanesPlugin",
-  "api": 3
+  "api": 4
 }

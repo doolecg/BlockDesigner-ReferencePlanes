@@ -13,13 +13,13 @@
   <a href="https://github.com/doolecg/BlockDesigner-ReferencePlanes/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/doolecg/BlockDesigner-ReferencePlanes?label=release"></a>
   <a href="https://github.com/doolecg/BlockDesigner-ReferencePlanes/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/doolecg/BlockDesigner-ReferencePlanes/total"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/doolecg/BlockDesigner-ReferencePlanes"></a>
-  <a href="https://github.com/doolecg/BlockDesigner"><img alt="BlockDesigner plugin API 3" src="https://img.shields.io/badge/BlockDesigner-plugin%20API%203-46C46E"></a>
+  <a href="https://github.com/doolecg/BlockDesigner"><img alt="BlockDesigner plugin API 4" src="https://img.shields.io/badge/BlockDesigner-plugin%20API%204-46C46E"></a>
 </p>
 
 ---
 
 **Reference Planes** is a plugin for [BlockDesigner](https://github.com/doolecg/BlockDesigner), the Windows editor for Minecraft builds. It is released
-on its own, separately from the app. It needs **BlockDesigner 0.4.12 or later** (plugin API 3).
+on its own, separately from the app. It needs **BlockDesigner 0.4.14 or later** (plugin API 4).
 
 **Contents:** [Download](#download-and-install) · [Features](#features) · [Building from source](#building-from-source) · [Project layout](#project-layout)
 
@@ -33,6 +33,8 @@ access as BlockDesigner itself, so only install ones you trust.
 
 ## Features
 
+- **Its tab on the right** shows it's running, what it adds, and settings for new pictures: their height, opacity,
+  whether blocks cover them, and whether one added in an axis view shows only there.
 - **Add a picture:** **Plugins › Add reference image…**, or drop a PNG, JPEG, GIF or BMP file on the window (or pick
   it in **Import**). If another plugin also takes pictures (the Palette Tools example turns them into pixel art),
   BlockDesigner asks which one you want.
@@ -86,7 +88,7 @@ You need Windows and a JDK 26 (Temurin 26 is what BlockDesigner uses; set `org.g
 ./gradlew test     # run the tests
 ```
 
-The plugin compiles against the BlockDesigner plugin API jars in [`libs/`](libs) (from BlockDesigner 0.4.12). The app
+The plugin compiles against the BlockDesigner plugin API jars in [`libs/`](libs) (from BlockDesigner 0.4.14). The app
 provides them, and JavaFX, at runtime, so they are never bundled into the plugin. To target a newer API, replace them
 with the jars from a newer BlockDesigner build (`./gradlew :plugin-api:jar :core:jar` in the
 [BlockDesigner repository](https://github.com/doolecg/BlockDesigner)) and update the file names in `build.gradle.kts`.
