@@ -14,13 +14,13 @@
   <a href="https://github.com/doolecg/BlockDesigner-ReferencePlanes/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/doolecg/BlockDesigner-ReferencePlanes/total"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/doolecg/BlockDesigner-ReferencePlanes"></a>
   <img alt="Platform: Windows" src="https://img.shields.io/badge/platform-Windows-0078D6">
-  <a href="https://github.com/doolecg/BlockDesigner"><img alt="BlockDesigner plugin API 4" src="https://img.shields.io/badge/BlockDesigner-plugin%20API%204-46C46E"></a>
+  <a href="https://github.com/doolecg/BlockDesigner"><img alt="BlockDesigner plugin API 6" src="https://img.shields.io/badge/BlockDesigner-plugin%20API%206-46C46E"></a>
 </p>
 
 ---
 
 Reference Planes is a plugin for [BlockDesigner](https://github.com/doolecg/BlockDesigner), the Windows editor for Minecraft builds. It is released
-on its own, separately from the app. It needs **BlockDesigner 0.4.14 or later** (plugin API 4).
+on its own, separately from the app. It needs **BlockDesigner 0.4.24 or later** (plugin API 6).
 
 **Contents:** [Download](#download-and-install) · [Features](#features) · [Building from source](#building-from-source) · [Project layout](#project-layout)
 
@@ -38,11 +38,12 @@ access as BlockDesigner itself, so only install ones you trust.
 
 ### Adding pictures
 
-- **Its tab on the right** shows it's running, what it adds, and settings for new pictures: their height, opacity,
-  whether blocks cover them, and whether one added in an axis view shows only there.
+- **How new pictures start out** is set on its page in BlockDesigner's **Settings** window (under Plugins, or
+  **Open settings…** on its tab): their height in blocks, opacity, how blocks cover them, and whether one added in an
+  axis view shows only there. Its tab on the right shows it's running and what it adds.
 - **Add a picture:** **Plugins › Add reference image…**, or drop a PNG, JPEG, GIF or BMP file on the window (or pick
-  it in **Import**). If another plugin also takes pictures (the Palette Tools example turns them into pixel art),
-  BlockDesigner asks which one you want.
+  it in **Import**). If another plugin also takes pictures (Palette Tools and Pixel Art Generator turn them into pixel
+  art), BlockDesigner asks which one you want. **Add reference image…** can be given a key in Settings › Keybinds.
 - **Where it goes:** at the point the camera orbits around, 16 blocks tall, facing you. Added in an orthographic axis
   view (numpad 1 / 3 / 7, or a view cube face), it faces that view straight on and **shows only in that view**, like
   Blender's "align to view" references. Otherwise it shows in every view.
@@ -61,9 +62,7 @@ access as BlockDesigner itself, so only install ones you trust.
 
 | Entry | What it does |
 |---|---|
-| Properties… | Every number in one window: position, rotation, scale, UV offset and scale, opacity |
-| Position, rotation, scale | Fields for X, Y and Z (press Enter to apply), **Reset rotation**, **Reset aspect ratio** (back to the picture's own proportions) |
-| UV offset and scale | Shift or zoom the picture on its plane. Outside the picture the plane is see-through. **Reset UV** |
+| Properties… | Every number in one window. **Transform:** position (blocks), rotation (°) and scale, with **Reset rotation** and **Reset aspect ratio** (back to the picture's own proportions). **Picture:** UV offset and scale (shift or zoom the picture on its plane; outside it the plane is see-through), opacity (%), with **Reset UV**. A field that isn't a number says so and keeps Apply off |
 | Opacity | A slider and 100 / 75 / 50 / 25 % |
 | Show in | All views, orthographic views only, or one orthographic view (Front, Back, Left, Right, Top, Bottom) |
 | Draw | **Behind blocks** (a backdrop that blocks always cover), **In the scene** (blocks in front hide it), **In front of blocks** |
@@ -87,7 +86,7 @@ You need Windows and a JDK 26 (Temurin 26 is what BlockDesigner uses; set `org.g
 ./gradlew jar      # build/libs/reference-planes-<version>.jar
 ```
 
-The plugin compiles against the BlockDesigner plugin API jars in [`libs/`](libs) (from BlockDesigner 0.4.23). The app
+The plugin compiles against the BlockDesigner plugin API jars in [`libs/`](libs) (from BlockDesigner 0.4.24). The app
 provides them, and JavaFX, at runtime, so they are never bundled into the plugin. To target a newer API, replace them
 with the jars from a newer BlockDesigner build (`./gradlew :plugin-api:jar :core:jar` in the
 [BlockDesigner repository](https://github.com/doolecg/BlockDesigner)) and update the file names in `build.gradle.kts`.

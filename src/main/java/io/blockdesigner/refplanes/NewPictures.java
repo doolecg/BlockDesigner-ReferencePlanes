@@ -7,27 +7,46 @@ import io.blockdesigner.plugin.Options;
 import java.util.List;
 
 /**
- * How new pictures start out, from the settings in the plugin's tab: their height, opacity, whether blocks cover them,
- * and whether one added in an axis view shows only in that view. Each picture can still be changed afterwards.
+ * How new pictures start out, from the plugin's page in BlockDesigner's Settings window: their height, opacity,
+ * whether blocks cover them, and whether one added in an axis view shows only in that view. Each picture can still be
+ * changed afterwards (its right-click menu and Properties).
  */
 record NewPictures(double height, double opacity, Drawing.Depth depth, boolean onlyInItsView) {
+    /** The Draw values, as stored and as the right-click menu words them. */
     static final List<String> DRAW = List.of("Behind blocks", "In the scene", "In front of blocks");
 
     static final Options OPTIONS = Options.builder()
-            .decimal("height", "Height (blocks)", ReferenceSettings.DEFAULT_SIZE, 1, 512)
-            .decimal("opacity", "Opacity", 1, 0.05, 1)
+            .group("New pictures")
+            .decimal("height", "Height", ReferenceSettings.DEFAULT_SIZE, 1, 512).unit("blocks")
+            .help("How tall a new picture is. Scale each one afterwards with the Scale tool or Properties.")
+            .decimal("opacity", "Opacity", 1, 0.05, 1).unit("%")
             .choice("draw", "Draw", DRAW, DRAW.get(1))
-            .toggle("onlyInItsView", "Added in an axis view: show only there", true)
+            .help("In the scene: blocks in front of the picture hide it.")
+            .toggle("onlyInItsView", "Show only in the view it was added in", true)
+            .help("For pictures added in a front, side or top view; in the 3D view they always show everywhere.")
             .build();
 
     static final NewPictures DEFAULT = of(OPTIONS.defaults());
 
     static NewPictures of(OptionValues v) {
-        Drawing.Depth depth = switch (DRAW.indexOf(v.choice("draw"))) {
+        return new NewPictures(v.decimal("height"), v.decimal("opacity"), depth(v.choice("draw")), v.toggle("onlyInItsView"));
+    }
+
+    /** A Draw value as a depth; anything unknown is "In the scene". */
+    static Drawing.Depth depth(String draw) {
+        return switch (DRAW.indexOf(draw)) {
             case 0 -> Drawing.Depth.BEHIND_BLOCKS;
             case 2 -> Drawing.Depth.IN_FRONT;
             default -> Drawing.Depth.IN_SCENE;
         };
-        return new NewPictures(v.decimal("height"), v.decimal("opacity"), depth, v.toggle("onlyInItsView"));
+    }
+
+    /** The Draw wording for a depth (the right-click menu uses the same words). */
+    static String draw(Drawing.Depth d) {
+        return switch (d) {
+            case BEHIND_BLOCKS -> DRAW.get(0);
+            case IN_FRONT -> DRAW.get(2);
+            default -> DRAW.get(1);
+        };
     }
 }

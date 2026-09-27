@@ -7,8 +7,8 @@ import io.blockdesigner.plugin.PluginContext;
 /**
  * Reference Planes: pictures placed in the scene to build from, like Blender's reference images. They are listed in
  * the Layers panel as REFERENCE, moved and turned with the Move and Rotate tools, and set up from their right-click
- * menu (transform, UV, opacity, the views they show in, whether blocks cover them, flips…). Its tab on the right sets
- * how new pictures start out.
+ * menu (Properties, opacity, the views they show in, whether blocks cover them, flips…). How new pictures start out
+ * is set on its page in BlockDesigner's Settings window.
  */
 public final class ReferencePlanesPlugin implements BlockDesignerPlugin {
     @Override

@@ -7,9 +7,8 @@ import io.blockdesigner.plugin.ToolEvent.Vec3;
 import io.blockdesigner.plugin.SceneObject;
 import io.blockdesigner.plugin.SceneObjectType;
 import io.blockdesigner.plugin.ViewInfo;
+import io.blockdesigner.plugin.ui.PluginUi;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
@@ -103,9 +102,14 @@ final class ReferenceType implements SceneObjectType {
         ctx.toast(message);
     }
 
+    /** The app's dialogs, look and main window. */
+    PluginUi ui() {
+        return ctx.ui();
+    }
+
     /** Plugins › Add reference image…: pick pictures and add each. */
     void chooseAndAdd() {
-        List<File> files = chooser("Add reference images").showOpenMultipleDialog(owner());
+        List<File> files = chooser("Add reference images").showOpenMultipleDialog(ctx.ui().owner());
         if (files == null) return;
         for (File f : files) {
             try {
@@ -122,16 +126,5 @@ final class ReferenceType implements SceneObjectType {
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Pictures (PNG, JPEG, GIF, BMP)",
                 EXTENSIONS.stream().map(e -> "*." + e).toList()));
         return fc;
-    }
-
-    /** The main window, to own file choosers and dialogs. */
-    static Window owner() {
-        Window any = null;
-        for (Window w : Window.getWindows()) {
-            if (!(w instanceof Stage) || !w.isShowing()) continue;
-            if (w.isFocused()) return w;
-            if (any == null) any = w;
-        }
-        return any;
     }
 }

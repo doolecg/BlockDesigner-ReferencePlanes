@@ -1,3 +1,19 @@
+# Reference Planes 1.2.0
+
+A tidier right-click menu with every number in one Properties window, and the settings for new pictures in BlockDesigner's Settings window.
+
+**Needs BlockDesigner 0.4.24 or later** (plugin API 6). Older BlockDesigners keep 1.1.6 until BlockDesigner itself is updated.
+
+## New
+- **Properties window, redone:** position, rotation and scale under **Transform**, UV offset and scale and opacity under **Picture**, each with its unit. **Reset rotation**, **Reset aspect ratio** and **Reset UV** are at the top of their sections. A field that isn't a number says so, and Apply waits until it is.
+- **Add reference image…** can be given a key in Settings › Keybinds.
+
+## Changed
+- **Settings for new pictures are in the Settings window**, on Reference Planes' page (the tab's **Open settings…** button opens it): height in blocks, opacity in %, how blocks cover them, and whether one added in an axis view shows only there, each with a line of help. The height has an exact value box next to its slider. Your settings are kept.
+- **Shorter right-click menu:** Properties…, Opacity, Show in, Draw (now showing the current choice), the flips, aligning to the view and Replace picture…. The position, rotation, scale and UV fields moved into Properties.
+
+---
+
 # Reference Planes 1.1.6
 
 Kept up to date with BlockDesigner 0.4.23: built and tested against its plugin API. Nothing changes in how it works.
