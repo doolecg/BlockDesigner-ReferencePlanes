@@ -1,3 +1,14 @@
+# Reference Planes 1.2.1
+
+Kept up to date with BlockDesigner 0.4.27: built and tested against its plugin API. Nothing changes in how it works.
+
+**Needs BlockDesigner 0.4.24 or later** (plugin API 6). Older BlockDesigners keep 1.1.6 until BlockDesigner itself is updated.
+
+## Changed
+- Built against the BlockDesigner 0.4.27 plugin API.
+
+---
+
 # Reference Planes 1.2.0
 
 A tidier right-click menu with every number in one Properties window, and the settings for new pictures in BlockDesigner's Settings window.
